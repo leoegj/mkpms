@@ -77,7 +77,7 @@ static inline struct task_struct *wx_next_task(struct task_struct *task)
 /* ========== Kernel function pointers ========== */
 
 /* Memory management */
-extern void *(*kfunc_find_vma)(void *mm, unsigned long addr);
+extern void *(*kfunc___find_vma)(void *mm, unsigned long addr);
 extern void *(*kfunc_get_task_mm)(void *task);
 extern void (*kfunc_mmput)(void *mm);
 /* find_task_by_vpid: use find_task_by_vpid() from linux/sched.h */

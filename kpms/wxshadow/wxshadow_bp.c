@@ -57,7 +57,7 @@ static int prepare_shadow_target(void *mm, unsigned long addr,
     void *vma;
     int ret;
 
-    vma = kfunc_find_vma(mm, addr);
+    vma = kfunc___find_vma(mm, addr);
     if (!vma || vma_start(vma) > addr) {
         pr_err("wxshadow: [%s] no vma for %lx\n", op, addr);
         return -1;
@@ -1045,7 +1045,7 @@ static void *copy_from_user_via_pte(void __user *ubuf, unsigned long len)
 
     /* Split PMD block if user buffer is in THP */
     {
-        void *buf_vma = kfunc_find_vma(caller_mm, uaddr);
+        void *buf_vma = kfunc___find_vma(caller_mm, uaddr);
         if (buf_vma && vma_start(buf_vma) <= uaddr)
             wxshadow_try_split_pmd(caller_mm, buf_vma, buf_page);
     }

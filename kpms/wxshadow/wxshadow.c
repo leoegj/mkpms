@@ -32,7 +32,7 @@ KPM_DESCRIPTION("W^X Shadow Memory - Hidden Breakpoint Mechanism");
 /* ========== Kernel function pointers ========== */
 
 /* Memory management */
-void *(*kfunc_find_vma)(void *mm, unsigned long addr);
+void *(*kfunc___find_vma)(void *mm, unsigned long addr);
 void *(*kfunc_get_task_mm)(void *task);
 void (*kfunc_mmput)(void *mm);
 /* find_task_by_vpid: use find_task_by_vpid() from linux/sched.h */
@@ -732,7 +732,7 @@ retry:
 
     if (state != WX_STATE_DORMANT && state != WX_STATE_NONE) {
         mm = page->mm;
-        if (!mm || !page->pfn_original || !kfunc_find_vma) {
+        if (!mm || !page->pfn_original || !kfunc___find_vma) {
             ret = -14;
             goto out_fail_locked;
         }
@@ -743,7 +743,7 @@ retry:
             goto out_fail_locked;
         }
 
-        vma = kfunc_find_vma(mm, page->page_addr);
+        vma = kfunc___find_vma(mm, page->page_addr);
         if (!vma || vma_start(vma) > page->page_addr) {
             ret = -14;
             goto out_fail_locked;
@@ -878,7 +878,7 @@ retry:
         goto out_fail;
 
     mm = page->mm;
-    if (!mm || !page->pfn_original || !kfunc_find_vma) {
+    if (!mm || !page->pfn_original || !kfunc___find_vma) {
         ret = -14;
         goto out_fail;
     }
@@ -889,7 +889,7 @@ retry:
         goto out_fail;
     }
 
-    vma = kfunc_find_vma(mm, page->page_addr);
+    vma = kfunc___find_vma(mm, page->page_addr);
     if (!vma || vma_start(vma) > page->page_addr) {
         ret = -14;
         goto out_fail;
@@ -1063,7 +1063,7 @@ int wxshadow_teardown_page(struct wxshadow_page *page, const char *reason)
     }
 
     /* --- Step 4: restore PTE to original --- */
-    if (page->mm && page->pfn_original && kfunc_find_vma) {
+    if (page->mm && page->pfn_original && kfunc___find_vma) {
         void *mm = page->mm;
         u64 probe;
         if (!is_kva((unsigned long)mm) ||
@@ -1072,7 +1072,7 @@ int wxshadow_teardown_page(struct wxshadow_page *page, const char *reason)
                     mm, page->page_addr);
             ret = -14;
         } else {
-            void *vma = kfunc_find_vma(mm, page->page_addr);
+            void *vma = kfunc___find_vma(mm, page->page_addr);
             if (!vma || vma_start(vma) > page->page_addr) {
                 pr_warn("wxshadow: [teardown] no vma for addr=%lx during %s\n",
                         page->page_addr, reason);

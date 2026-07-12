@@ -1,0 +1,34 @@
+name: Build KPM Modules
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install cross-compiler      - name: 安装交叉编译器      - 名称: 安装交叉编译器
+        run: sudo apt-get install -y gcc-aarch64-linux-gnu cmake
+      - name: Build wxshadow      - 名称: 构构建 wxshadow      - 名称: 构建 wxshadow      - 名称: 构建 wxshadow
+        run: |        运行: |
+          cd kpms/wxshadow && mkdir -p build && cd build
+          cmake -DCMAKE_C_COMPILER=aarch64-linux-gnu-gcc ..
+          make wxshadow.kpm          构建 wxshadow.kpm
+      - name: Build hide-so      - 名称: 构构建 hide-so      - 名称: 构构建 hide-so      - 名称: 构建 hide-so      - 名称: 构建 hide-so      - 名称: uild hide-so      - 名称: 构建 hide-so      - 名称: 构建 hide-so      - 名称: 构建 hide-so      - 名称: 建 hide-so      - 名称: 构建 hide-so
+        run: |        运行: |
+          cd kpms/hide-so && mkdir -p build && cd build
+          cmake -DCMAKE_C_COMPILER=aarch64-linux-gnu-gcc ..
+          make hide-so.kpm          构建 hide-so.kpm
+      - name: Build recompile      - name: 构构建重新编译      - 名称: 构构建重新编译      - 名称: 构构建重新编译      - 名称: 构建重新编译      - 名称: 构建重新编译      - 名称: uild recompile      - name: 构建重新编译      - 名称: 构建重新编译      - 名称: 建重新编译      - 名称: 构建重新编译      - 名称: 构建重新编译      - 名称: 构构建重新编译      - 名称: 构构建重新编译      - 名称: 构建重新编译      - 名称: 构建重新编译      - 名称: uild recompile      - name: 构建重新编译      - 名称: 构建重新编译      - 名称: 构建重新编译      - 名称: 建重新编译      - 名称: 构建重新编译
+        run: |        运行: |
+          cd kpms/recompile && mkdir -p build && cd build
+          cmake -DCMAKE_C_COMPILER=aarch64-linux-gnu-gcc ..
+          make recompile.kpm          构建 recompile.kpm
+      - name: Upload      - 名称: 上传
+        uses: actions/upload-artifact@v4        使用: aactions/upload-artifact@v4        使用: aactions/upload-artifact@v4        使用: aactions/upload-artifact@v4        使用: aactions/upload-artifact@v4        使用: actions/upload-artifact@v4        使用: cactions/upload-artifact@v4        使用: cactions/upload-artifact@v4        使用: cactions/upload-artifact@v4        使用: cactions/upload-artifact@v4        使用: ctions/upload-artifact@v4        使用: actions/upload-artifact@v4        使用: aactions/upload-artifact@v4        使用: aactions/upload-artifact@v4        使用: aactions/upload-artifact@v4        使用: actions/upload-artifact@v4        使用: aactions/upload-artifact@v4        使用: aactions/upload-artifact@v4        使用: aactions/upload-artifact@v4        使用: aactions/upload-artifact@v4        使用: actions/upload-artifact@v4        使用: cactions/upload-artifact@v4        使用: ca        使用: actions/upload-artifact@v4        使用: aactions/upload-artifact@v4        使用: aactions/upload-artifact@v4        使用: aactions/upload-artifact@v4        使用: aactions/upload-artifact@v4        使用: actions/upload-artifact@v4        使用: cactions/upload-artifact@v4        使用: cactions/upload-artifact@v4        使用: cactions/upload-artifact@v4        使用: cactions/upload-artifact@v4        使用: ctions/upload-artifact@v4        使用: a        使用: ctions/upload-artifact@v4        使用: actions/upload-artifact@v4        使用: actions/upload-artifact@v4        使用: actions/upload-artifact@v4        使用: ctions/upload-artifact@v4        使用: actions/upload-artifact@v4        使用: actions/upload-artifact@v4        使用: actions/upload-artifact@v4        使用: tions/upload-artifact@v4        使用: ctions/upload-artifact@v4        使用: actions/upload-artifact@v4        使用: actions/upload-artifact@v4        使用: ctions/upload-artifact@v4        使用: actions/upload-artifact@v4        使用: actions/upload-artifact@v4        使用: actions/upload-artifact@v4        使用: ctions/upload-artifact@v4        使用: a        使用: ctions/upload-artifact@v4        使用: actions/upload-artifact@v4        使用: actions/upload-artifact@v4        使用: actions/upload-artifact@v4        使用: ctions/upload-artifact@v4        使用: actions/upload-artifact@v4        使用: actions/upload-artifact@v4        使用: actions/upload-artifact@v4        使用: tions/upload-artifact@v4        使用: ctions/upload-artifact@v4        使用: aactions/upload-artifact@v4        使用: actions/upload-artifact@v4        使用: aactions/upload-artifact@v4        使用: aactions/upload-artifact@v4        使用: aactions/upload-artifact@v4        使用: actions/upload-artifact@v4        使用: aactions/upload-artifact@v4        使用: aactions/upload-artifact@v4        使用: aactions/upload-artifact@v4        使用: aactions/upload-artifact@v4        使用: actions/upload-artifact@v4        使用: cactions/upload-artifact@v4        使用: cactions/upload-artifact@v4        使用: cactions/upload-artifact@v4        使用: cactions/upload-artifact@v4        使用: ctions/upload-artifact@v4        使用: a        使用: actions/upload-artifact@v4        使用: aactions/upload-artifact@v4        使用: aactions/upload-artifact@v4        使用: aactions/upload-artifact@v4        使用: actions/upload-artifact@v4        使用: aactions/upload-artifact@v4        使用: actions/upload-artifact@v4        使用: aactions/upload-artifact@v4        使用: actions/upload-artifact@v4        使用: tactions/upload-artifact@v4        使用: tions/upload-artifact@v4        使用: actions/upload-artifact@v4        使用: aactions/upload-artifact@v4        使用: aactions/upload-artifact@v4        使用: actions/upload-artifact@v4        使用: aactions/upload-artifact@v4        使用: aactions/upload-artifact@v4        使用: aactions/upload-artifact@v4        使用: actions/upload-artifact@v4        使用: aactions/upload-artifact@v4        使用: actions/upload-artifact@v4        使用: aactions/upload-artifact@v4        使用: actions/upload-artifact@v4        使用: tactions/upload-artifact@v4        使用: tions/upload-artifact@v4        使用: actions/upload-artifact@v4        使用: aactions/upload-artifact@v4        使用: actions/upload-artifact@v4        使用: actions/upload-artifact@v4
+        with:        使用:
+          name: kpm-modules          名称: kpm-modules          名称: pm-modules          名称: kpm-modules
+          path          路径: |          路径: |
+            kpms/wxshadow/build/wxshadow.kpm
+            kpms/hide-so/build/hide-so.kpm
+            kpms/recompile/build/recompile.kpm

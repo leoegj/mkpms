@@ -42,7 +42,7 @@ int wxshadow_handle_read_fault(void *mm, unsigned long addr)
     }
 
     /* Get VMA for page switching (lockless) */
-    vma = kfunc_find_vma(mm, addr);
+    vma = kfunc___find_vma(mm, addr);
     if (!vma || vma_start(vma) > addr) {
         wxshadow_teardown_page(page_info, "VMA Gone (read fault)");
         wxshadow_page_put(page_info);
@@ -93,7 +93,7 @@ int wxshadow_handle_exec_fault(void *mm, unsigned long addr)
     }
 
     /* Get VMA for page switching (lockless) */
-    vma = kfunc_find_vma(mm, addr);
+    vma = kfunc___find_vma(mm, addr);
     if (!vma || vma_start(vma) > addr) {
         wxshadow_teardown_page(page_info, "VMA Gone (exec fault)");
         wxshadow_page_put(page_info);
@@ -426,7 +426,7 @@ static void wxshadow_pause_parent_shadow_pages(void *parent_mm)
                 !page->logical_release_pending) {
                 spin_unlock(&global_lock);
 
-                vma = kfunc_find_vma ? kfunc_find_vma(parent_mm, batch[i].page_addr) : NULL;
+                vma = kfunc___find_vma ? kfunc___find_vma(parent_mm, batch[i].page_addr) : NULL;
                 if (vma && vma_start(vma) <= batch[i].page_addr) {
                     ret = wxshadow_page_enter_dormant_locked(page, vma,
                                                              batch[i].page_addr);
@@ -507,7 +507,7 @@ static void wxshadow_resume_parent_shadow_pages(void *parent_mm)
                 wxshadow_page_has_active_mods_locked(page)) {
                 spin_unlock(&global_lock);
 
-                vma = kfunc_find_vma ? kfunc_find_vma(parent_mm, batch[i].page_addr) : NULL;
+                vma = kfunc___find_vma ? kfunc___find_vma(parent_mm, batch[i].page_addr) : NULL;
                 if (vma && vma_start(vma) <= batch[i].page_addr) {
                     ret = wxshadow_page_activate_shadow_locked(page, vma,
                                                                batch[i].page_addr);
@@ -846,7 +846,7 @@ static int wxshadow_brk_handler_impl(struct pt_regs *regs, unsigned int esr)
     spin_unlock(&global_lock);
 
     /* Get VMA (lockless) */
-    vma = kfunc_find_vma(mm, pc);
+    vma = kfunc___find_vma(mm, pc);
     if (!vma || vma_start(vma) > pc) {
         wxshadow_brk_inflight_put(page_info);
         wxshadow_teardown_page(page_info, "VMA Gone (BRK handler)");
@@ -959,7 +959,7 @@ static int wxshadow_step_handler_impl(struct pt_regs *regs, unsigned int esr)
     }
 
     /* Get VMA (lockless) */
-    vma = kfunc_find_vma(mm, page_addr);
+    vma = kfunc___find_vma(mm, page_addr);
 
     if (!vma || vma_start(vma) > page_addr) {
         wxshadow_teardown_page(page_info, "VMA Gone (step handler)");

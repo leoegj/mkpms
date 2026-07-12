@@ -69,7 +69,7 @@ int resolve_symbols(void)
 
     /* ===== Memory management (all exported) ===== */
     pr_info("wxshadow: [1/12] mm functions...\n");
-    RESOLVE_SYMBOL(find_vma);
+    RESOLVE_SYMBOL(__find_vma);
     RESOLVE_SYMBOL(get_task_mm);
     RESOLVE_SYMBOL(mmput);
     /* find_task_by_vpid: use wxfunc(find_task_by_vpid) */
